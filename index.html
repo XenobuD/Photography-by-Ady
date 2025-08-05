@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="ro">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Visan Adrian Fotograf</title>
+  <meta name="description" content="Fotograf de nuntă - Capturăm emoții și momente magice pentru amintiri de o viață.">
+   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <link rel="stylesheet" href="index.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display&display=swap" rel="stylesheet">
+</head>
+<body>
+  <canvas id="background-particles" role="presentation"></canvas>
+
+  <div class="intro">
+    <img src="Imagini/inele de nunta.jpg" alt="Inel de Nuntă" />
+    <h1><strong>WELCOME</strong></h1>
+  </div>
+
+  <div class="page-wrapper">
+    <div class="main-content hidden">
+
+      <header>
+        <a href="index.html" class="logo-link">
+          <div class="site-logo">
+            <span class="logo-main">AV</span>
+            <span class="logo-sub">PHOTOGRAPHY &#169;</span>
+          </div>
+        </a>
+        <nav class="main-nav" aria-label="Navigație principală">
+          <ul>
+            <li><a href="#">Acasă</a></li>
+            <li><a href="Despre.html">Despre</a></li>
+            <li><a href="Galerie.html">Galerie</a></li>
+          </ul>
+        </nav>
+      </header>
+
+      <section class="intro-text">
+        <p>Capturăm emoții și momente magice din cele mai frumoase zile din viața voastră.</p>
+        <div class="gallery-grid-five">
+          <img src="Add la index/pic1.jpg" alt="Left Top" class="side-img" />
+          <img src="Imagini/home03.jpg" alt="Left Bottom" class="side-img" />
+          <img src="Add la index/pic2.jpg" alt="Center" class="center-img" />
+          <img src="Add la index/pic3.jpg" alt="Right Top" class="side-img" />
+          <img src="Add la index/pic4.jpg" alt="Right Bottom" class="side-img" />
+        </div>
+      </section>
+
+      <section class="horizontal-strip">
+        <div class="gallery-row">
+          <img src="image 4 slider/1.jpg" alt="poza 1" />
+          <img src="image 4 slider/img2.jpg" alt="poza 2" />
+          <img src="image 4 slider/img3.jpg" alt="poza 3" />
+          <img src="image 4 slider/img4.jpg" alt="poza 4" />
+        </div>
+      </section>
+
+      <footer>
+        
+
+          <div class="footer-content" id="contact-info">
+            <p>&copy; Visan Adrian Photography</p>
+          </div>
+        </div>
+      </footer>
+
+    
+
+    </div>
+  </div>
+
+  <script src="index.js"></script>
+  <script>
+    function openOverlay(src) {
+      document.getElementById("overlay-img").src = src;
+      document.getElementById("overlay").style.display = "flex";
+    }
+
+    function closeOverlay() {
+      document.getElementById("overlay").style.display = "none";
+    }
+
+    const canvas = document.getElementById('background-particles');
+    const ctx = canvas.getContext('2d');
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
+
+    let particles = [];
+    for (let i = 0; i < 100; i++) {
+      particles.push({
+        x: Math.random() * canvas.width,
+        y: Math.random() * canvas.height,
+        radius: Math.random() * 2 + 1,
+        dx: (Math.random() - 0.5) * 0.5,
+        dy: (Math.random() - 0.5) * 0.5,
+        opacity: Math.random() * 0.5 + 0.3
+      });
+    }
+
+    function animateParticles() {
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+      particles.forEach(p => {
+        ctx.beginPath();
+        ctx.arc(p.x, p.y, p.radius, 0, Math.PI * 2);
+        ctx.fillStyle = `rgba(255,255,255,${p.opacity})`;
+        ctx.fill();
+        p.x += p.dx;
+        p.y += p.dy;
+        if (p.x < 0 || p.x > canvas.width) p.dx *= -1;
+        if (p.y < 0 || p.y > canvas.height) p.dy *= -1;
+      });
+      requestAnimationFrame(animateParticles);
+    }
+
+    animateParticles();
+
+    window.addEventListener('resize', () => {
+      canvas.width = window.innerWidth;
+      canvas.height = window.innerHeight;
+    });
+
+    document.addEventListener('mousemove', (e) => {
+      const x = (e.clientX / window.innerWidth - 0.5) * 10;
+      const y = (e.clientY / window.innerHeight - 0.5) * 10;
+      document.body.style.transform = `scale(1.02) translate(${x}px, ${y}px)`;
+    });
+  </script>
+</body>
+</html>
